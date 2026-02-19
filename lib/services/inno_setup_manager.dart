@@ -74,7 +74,7 @@ class InnoSetupManager {
       //   fileName: '${Inno.tmp}\\$vcRedistExe',
       //   parameters: '/install /passive /norestart',
       //   flags: [RunFlag.runHidden],
-      //   message: 'Installing Microsoft Visual C++ 2015-2022 Redistributable...',
+      //   message: 'Installing Microslop Visual C++ 2015-2022 Redistributable...',
       // )
       ..addIcons(
         name: '${Inno.autoprograms}\\${Config.appName}',
@@ -131,7 +131,15 @@ class InnoSetupManager {
       ..addSetup(
         key: 'VersionInfoVersion',
         value: '${Config.buildNumber}',
-      );
+      )
+      ..addSetup(key: 'AppPublisher', value: Config.company)
+      ..addSetup(key: 'VersionInfoDescription', value: Config.description)
+      ..addSetup(key: 'LicenseFile', value: join(Directory.current.path, Config.license_file))
+      ..addTasks(
+          name: 'desktopicon',
+          description: '{cm:CreateDesktopIcon}',
+          groupDescription: '{cm:AdditionalIcons}',
+          flags: Config.createStartMenuShortcut ? [TaskFlag.unchecked] : []);
 
     if (File('LICENSE').existsSync()) {
       generator.addSetup(
