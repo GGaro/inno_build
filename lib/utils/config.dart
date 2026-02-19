@@ -75,4 +75,13 @@ class Config {
   ///
   /// This is the bundle id with the `.exe` extension.
   static String get execName => '$bundleId.exe';
+
+  static String? get company => _pubspec['inno_build']['company'];
+  
+  static String? get description => _pubspec['inno_build']['description'];
+  
+  static String? get licenseLanguage => _pubspec['inno_build']['license_language'];
+  
+  static bool get createStartMenuShortcut =>
+      _pubspec['inno_build']['create_start_menu_shortcut'] ?? true;
 }
