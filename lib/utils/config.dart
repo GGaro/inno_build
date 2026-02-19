@@ -1,11 +1,10 @@
 // Dart imports:
 import 'dart:io';
 
-// Package imports:
-import 'package:path/path.dart';
-
 // Project imports:
 import 'package:inno_build/utils/pubspec_manager.dart';
+// Package imports:
+import 'package:path/path.dart';
 
 /// Holds the configuration for the build process.
 ///
@@ -76,12 +75,31 @@ class Config {
   /// This is the bundle id with the `.exe` extension.
   static String get execName => '$bundleId.exe';
 
+  /// The company name.
+  ///
+  /// This is read from the `inno_build.company` key in the pubspec.yaml file.
   static String? get company => _pubspec['inno_build']['company'];
-  
+
+  /// The description.
+  ///
+  /// This is read from the `inno_build.description` key in the pubspec.yaml file.
   static String? get description => _pubspec['inno_build']['description'];
-  
-  static String? get licenseLanguage => _pubspec['inno_build']['license_language'];
-  
+
+  /// The license.
+  ///
+  /// This is read from the `inno_build.license` key in the pubspec.yaml file.
+  static String get licenseFile =>
+      _pubspec['inno_build']['license_file'] ?? 'LICENSE';
+
+  /// The license language.
+  ///
+  /// This is read from the `inno_build.license_language` key in the pubspec.yaml file.
+  static String? get licenseLanguage =>
+      _pubspec['inno_build']['license_language'];
+
+  /// The create start menu shortcut.
+  ///
+  /// This is read from the `inno_build.create_start_menu_shortcut` key in the pubspec.yaml file.
   static bool get createStartMenuShortcut =>
       _pubspec['inno_build']['create_start_menu_shortcut'] ?? true;
 }

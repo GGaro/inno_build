@@ -3,9 +3,6 @@
 // Dart imports:
 import 'dart:io';
 
-// Package imports:
-import 'package:path/path.dart';
-
 // Project imports:
 import 'package:inno_build/models/build_mode.dart';
 import 'package:inno_build/models/file_flag.dart';
@@ -16,6 +13,8 @@ import 'package:inno_build/models/task_flag.dart';
 import 'package:inno_build/utils/config.dart';
 import 'package:inno_build/utils/constants.dart';
 import 'package:inno_build/utils/iss_generator.dart';
+// Package imports:
+import 'package:path/path.dart';
 
 /// Builds an Inno Setup script and compiles it into a Windows executable.
 class InnoSetupManager {
@@ -132,9 +131,11 @@ class InnoSetupManager {
         key: 'VersionInfoVersion',
         value: '${Config.buildNumber}',
       )
-      ..addSetup(key: 'AppPublisher', value: Config.company)
-      ..addSetup(key: 'VersionInfoDescription', value: Config.description)
-      ..addSetup(key: 'LicenseFile', value: join(Directory.current.path, Config.license_file))
+      ..addSetup(key: 'AppPublisher', value: Config.company ?? '')
+      ..addSetup(key: 'VersionInfoDescription', value: Config.description ?? '')
+      ..addSetup(
+          key: 'LicenseFile',
+          value: join(Directory.current.path, Config.licenseFile))
       ..addTasks(
           name: 'desktopicon',
           description: '{cm:CreateDesktopIcon}',
